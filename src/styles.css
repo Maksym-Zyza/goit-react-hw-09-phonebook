@@ -1,0 +1,211 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.Container {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+@media screen and (max-width: 900px) {
+  .Container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+/* Navigation */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #2a363b;
+}
+
+.link {
+  display: inline-block;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #757575;
+}
+
+.activeLink {
+  color: #01b4e4;
+}
+
+/* UserMenu  */
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  margin-right: 10px;
+  width: 48px;
+}
+
+.name {
+  margin-right: 12px;
+  font-weight: 700;
+  color: #455a64;
+}
+
+.user-btn {
+  padding: 8px;
+  border-radius: 10px;
+  color: aliceblue;
+  background-color: #3197f3;
+  border: none;
+  outline: #3197f3;
+}
+
+/* Vievs */
+.home-view-container {
+  min-height: calc(100vh - 50px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.home-view-title {
+  margin-top: 40px;
+  font-size: 44px;
+  font-weight: 600;
+  color: #37474f;
+  text-align: center;
+}
+.home-view-subtitle {
+  margin: 30px;
+  font-size: 30px;
+  font-weight: 600;
+  color: #37474f;
+  text-align: center;
+}
+
+.home-view-img {
+  display: inline;
+  width: 900px;
+  justify-content: center;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  margin: 20px;
+  font-weight: 700;
+  color: #455a64;
+  text-align: center;
+}
+
+/* Message */
+.message {
+  text-align: center;
+  color: #01b4e4;
+}
+
+/* Loader */
+.loaderViws {
+  display: flex;
+  height: 80px;
+  justify-content: center;
+  align-items: center;
+}
+
+.loaderDiv {
+  display: flex;
+  height: 32px;
+  justify-content: center;
+}
+
+/* Forms */
+.authForm {
+  width: 320px;
+  display: flex;
+  padding: 40px;
+  flex-direction: column;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(55%, 55%, 55%, 0.5);
+}
+
+.authLabel {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  color: #3197f3;
+}
+
+.input {
+  margin-top: 5px;
+  margin-bottom: 15px;
+  padding: 5px;
+  width: 240px;
+  height: 30px;
+  color: #424242;
+  border: 1px solid #3197f3;
+  outline: #3197f3;
+  border-radius: 5px;
+}
+
+.input:focus,
+.input:hover {
+  border: 2px solid #3197f3;
+}
+
+.btn {
+  height: 40px;
+  margin-top: 10px;
+  border-radius: 10px;
+  color: aliceblue;
+  background-color: #3197f3;
+  border: none;
+  outline: #3197f3;
+}
+
+.btn:hover {
+  transform: scale(1.02);
+}
