@@ -1,27 +1,31 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
+import React, { useState, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import * as authOperations from "../redux/auth/auth-operations";
 
-const LoginView = ({ onLogin }) => {
+const LoginView = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
 
+  const [password, setPassword] = useState("");
   const updatePassword = (e) => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const dispatch = useDispatch();
 
-    onLogin({ email, password });
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
 
-    setEmail("");
-    setPassword("");
-  };
+      dispatch(authOperations.logIn({ email, password }));
+
+      setEmail("");
+      setPassword("");
+    },
+    [dispatch, email, password]
+  );
 
   return (
     <div className="wrapper">
@@ -58,11 +62,7 @@ const LoginView = ({ onLogin }) => {
   );
 };
 
-const mapDispatchToProps = {
-  onLogin: authOperations.logIn,
-};
-
-export default connect(null, mapDispatchToProps)(LoginView);
+export default LoginView;
 
 // ===== class =====
 // class LoginView extends Component {

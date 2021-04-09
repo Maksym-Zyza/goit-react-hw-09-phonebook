@@ -1,6 +1,6 @@
 import React, { Suspense, lazy, useEffect } from "react";
 import { Switch } from "react-router-dom";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import Container from "./components/Container";
 import AppBar from "./components/AppBar";
 import * as authOperations from "./redux/auth/auth-operations";
@@ -13,10 +13,12 @@ const ContactsView = lazy(() => import("./views/ContactsView"));
 const RegisterView = lazy(() => import("./views/RegisterView"));
 const LoginView = lazy(() => import("./views/LoginView"));
 
-const App = ({ onGetCurrentToProps }) => {
+const App = () => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    onGetCurrentToProps();
-  }, [onGetCurrentToProps]);
+    dispatch(authOperations.getCurrentUser());
+  }, [dispatch]);
 
   return (
     <Container>
@@ -24,37 +26,36 @@ const App = ({ onGetCurrentToProps }) => {
 
       <Suspense fallback={<ViwsLoader />}>
         <Switch>
-          <PublicRoute exact path="/" component={HomeView} />
-          <PublicRoute
-            path="/register"
-            restricted
-            redirectTo={"/contacts"}
-            component={RegisterView}
-          />
-          <PublicRoute
-            path="/login"
-            restricted
-            redirectTo={"/contacts"}
-            component={LoginView}
-          />
-          <PrivateRaute
-            path="/contacts"
-            redirectTo={"/login"}
-            component={ContactsView}
-          />
+          <PublicRoute exact path="/">
+            <HomeView />
+          </PublicRoute>
+
+          <PublicRoute path="/register" restricted redirectTo={"/contacts"}>
+            <RegisterView />
+          </PublicRoute>
+
+          <PublicRoute path="/login" restricted redirectTo={"/contacts"}>
+            <LoginView />
+          </PublicRoute>
+
+          <PrivateRaute path="/contacts" redirectTo={"/login"}>
+            <ContactsView />
+          </PrivateRaute>
         </Switch>
       </Suspense>
     </Container>
   );
 };
 
-const mapDispatchToProps = {
-  onGetCurrentToProps: authOperations.getCurrentUser,
-};
-
-export default connect(null, mapDispatchToProps)(App);
+export default App;
 
 // ===== class =====
 // componentDidMount() {
 //   this.props.onGetCurrentToProps();
 // }
+
+// const mapDispatchToProps = {
+//   onGetCurrentToProps: authOperations.getCurrentUser,
+// };
+
+// export default connect(null, mapDispatchToProps)(App);

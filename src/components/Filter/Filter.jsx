@@ -1,10 +1,14 @@
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+// import PropTypes from "prop-types";
+import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../redux/contacts/contacts-actions";
 import * as selectors from "../../redux/contacts/contacts-selectors";
 import style from "./Filter.module.css";
 
-const Filter = ({ value, onChange }) => {
+const Filter = () => {
+  const value = useSelector(selectors.getFilter);
+  const dispatch = useDispatch();
+  const onChange = (e) => dispatch(actions.filterContacts(e.target.value));
+
   return (
     <div className={style.wrapper}>
       <label className={style.label}>
@@ -21,17 +25,15 @@ const Filter = ({ value, onChange }) => {
   );
 };
 
-Filter.propTypes = PropTypes.shape({
-  value: PropTypes.string,
-  onChange: PropTypes.func,
-}).isRequired;
+export default Filter;
 
-const mapStateToProps = (state) => ({
-  value: selectors.getFilter(state),
-});
+// ==========
+// const mapStateToProps = (state) => ({
+//   value: selectors.getFilter(state),
+// });
 
-const mapDispatchToProps = (dispatch) => ({
-  onChange: (e) => dispatch(actions.filterContacts(e.target.value)),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   onChange: (e) => dispatch(actions.filterContacts(e.target.value)),
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+// export default connect(mapStateToProps, mapDispatchToProps)(Filter);
